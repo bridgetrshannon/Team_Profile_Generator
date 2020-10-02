@@ -25,10 +25,15 @@ function mainMenu() {
                 }
                 return "Please enter a name"
             }
-        }]).then(answer{
-
+        }]).then(answer => {
+            const manager = new Manager(answers.id)
+            teamMembers.push(manager)
+            idArray.push(answers.managerId)
+            // call function here that fires next inquirer prompt
         })
     }
+
+    
 }
 
 // Write code to use inquirer to gather information about the development team members,
