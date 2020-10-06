@@ -31,9 +31,50 @@ function mainMenu() {
             return "Please enter a name";
           },
         },
+        {
+          // fill in more questions using this pattern
+          type: "input",
+          name: "managerId",
+          message: "What is your manager's ID?",
+          validate: (answer) => {
+            if (answer !== "") {
+              return true;
+            }
+            return "Please enter an ID";
+          },
+        },
+        {
+          // fill in more questions using this pattern
+          type: "input",
+          name: "managerEmail",
+          message: "What is your manager's email?",
+          validate: (answer) => {
+            if (answer !== "") {
+              return true;
+            }
+            return "Please enter an email";
+          },
+        },
+        {
+          // fill in more questions using this pattern
+          type: "input",
+          name: "managerOfficeNumber",
+          message: "What is your manager's office number?",
+          validate: (answer) => {
+            if (answer !== "") {
+              return true;
+            }
+            return "Please enter an office number";
+          },
+        },
       ])
       .then((answer) => {
-        const manager = new Manager(answer.id);
+        const manager = new Manager(
+          answer.managerName,
+          answer.managerId,
+          answer.managerEmail,
+          answer.managerOfficeNumber
+        );
         teamMembers.push(manager);
         idArray.push(answer.managerId);
         createEngineer();
@@ -41,11 +82,8 @@ function mainMenu() {
   }
   createManager();
 
-  // Write code to use inquirer to gather information about the development team members,
-  // and to create objects for each team member (using the correct classes as blueprints!)
-
   function createEngineer() {
-    console.log("Pease build your team");
+    console.log("Please build your team");
 
     // init function "which type of member would you like to add?"
     // create a switch off of that question
@@ -65,9 +103,50 @@ function mainMenu() {
             return "Please enter a name";
           },
         },
+        {
+          // fill in more questions using this pattern
+          type: "input",
+          name: "engineerId",
+          message: "What is your engineer's ID?",
+          validate: (answer) => {
+            if (answer !== "") {
+              return true;
+            }
+            return "Please enter an ID";
+          },
+        },
+        {
+          // fill in more questions using this pattern
+          type: "input",
+          name: "engineerEmail",
+          message: "What is your engineer's email?",
+          validate: (answer) => {
+            if (answer !== "") {
+              return true;
+            }
+            return "Please enter an email";
+          },
+        },
+        {
+          // fill in more questions using this pattern
+          type: "input",
+          name: "engineerGithub",
+          message: "What is your engineer's Github?",
+          validate: (answer) => {
+            if (answer !== "") {
+              return true;
+            }
+            return "Please enter a Github";
+          },
+        },
       ])
       .then((answer) => {
-        const engineer = new Engineer(answer.id);
+        const engineer = new Engineer(
+          answer.engineerName,
+          answer.engineerId,
+          answer.engineerEmail,
+          answer.engineerGithub
+        );
         teamMembers.push(engineer);
         idArray.push(answer.engineerId);
         createIntern();
@@ -75,7 +154,7 @@ function mainMenu() {
   }
 
   function createIntern() {
-    console.log("Pease build your team");
+    console.log("Please build your team");
     inquirer
       .prompt([
         {
@@ -90,10 +169,51 @@ function mainMenu() {
             return "Please enter a name";
           },
         },
+
+        {
+          // fill in more questions using this pattern
+          type: "input",
+          name: "internId",
+          message: "What is your intern's ID?",
+          validate: (answer) => {
+            if (answer !== "") {
+              return true;
+            }
+            return "Please enter an ID";
+          },
+        },
+        {
+          // fill in more questions using this pattern
+          type: "input",
+          name: "internEmail",
+          message: "What is your intern's email?",
+          validate: (answer) => {
+            if (answer !== "") {
+              return true;
+            }
+            return "Please enter an email";
+          },
+        },
+        {
+          // fill in more questions using this pattern
+          type: "input",
+          name: "internSchool",
+          message: "What is your intern's school?",
+          validate: (answer) => {
+            if (answer !== "") {
+              return true;
+            }
+            return "Please enter a school";
+          },
+        },
       ])
       .then((answer) => {
-        const intern = new Intern(answer.internName);
-        // (answer.internSchool);
+        const intern = new Intern(
+          answer.internName,
+          answer.internId,
+          answer.internEmail,
+          answer.internSchool
+        );
         teamMembers.push(intern);
         idArray.push(answer.internId);
         // call function here that fires next inquirer prompt
