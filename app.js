@@ -46,6 +46,11 @@ function mainMenu() {
 
   function createEngineer() {
     console.log("Pease build your team");
+
+    // init function "which type of member would you like to add?"
+    // create a switch off of that question
+    // Engineer? Intern? Or complete team?
+
     inquirer
       .prompt([
         {
@@ -87,7 +92,8 @@ function mainMenu() {
         },
       ])
       .then((answer) => {
-        const intern = new Intern(answer.id);
+        const intern = new Intern(answer.internName);
+        // (answer.internSchool);
         teamMembers.push(intern);
         idArray.push(answer.internId);
         // call function here that fires next inquirer prompt
@@ -97,7 +103,7 @@ function mainMenu() {
         // generate and return a block of HTML including templated divs for each employee!
       });
     function buildTeam() {
-      fs.writeFile(outputPath, render, "utf-8", function (err) {
+      fs.writeFile(outputPath, render(teamMembers), "utf-8", function (err) {
         if (err) throw err;
         // passed in outputPath
         console.log(outputPath);
@@ -105,8 +111,6 @@ function mainMenu() {
     }
   }
 }
-
-// Your writeFile call will take three arguments. the outputPath, a call to the render function you imported on line 11 (passing in the array of team members), and then "utf-8"
 
 mainMenu();
 
