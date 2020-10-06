@@ -107,7 +107,7 @@ function mainMenu() {
           ) {
             if (err) throw err;
             console.log(
-              "Your team has been built! Access your roster in the browser"
+              "Your team has been built! Access your roster in the browser!"
             );
           });
         }
