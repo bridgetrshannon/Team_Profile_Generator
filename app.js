@@ -20,7 +20,6 @@ function mainMenu() {
     inquirer
       .prompt([
         {
-          // fill in more questions using this pattern
           type: "input",
           name: "managerName",
           message: "What is your manager's name?",
@@ -32,7 +31,6 @@ function mainMenu() {
           },
         },
         {
-          // fill in more questions using this pattern
           type: "input",
           name: "managerId",
           message: "What is your manager's ID?",
@@ -44,7 +42,6 @@ function mainMenu() {
           },
         },
         {
-          // fill in more questions using this pattern
           type: "input",
           name: "managerEmail",
           message: "What is your manager's email?",
@@ -56,7 +53,6 @@ function mainMenu() {
           },
         },
         {
-          // fill in more questions using this pattern
           type: "input",
           name: "managerOfficeNumber",
           message: "What is your manager's office number?",
@@ -78,39 +74,52 @@ function mainMenu() {
         teamMembers.push(manager);
         idArray.push(answer.managerId);
         // add function here for nextTeamMember
-        // createEngineer();
+        nextTeamMember();
       });
   }
   createManager();
 
   function nextTeamMember() {
-      inquirer.prompt([{
-          type:
-          name: teamChoice
-          message:
-          choices: []
-      }]).then(answer => {
-          console.log(answer.teamChoice);
-          if (answer.teamChoice === "Engineer"){
-              createEngineer();
-          }
-          if (answer.teamChoice === "Intern"){
-              createIntern();
-          }
-      })
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "teamChoice",
+          message: "Which team member would you like to add?",
+          choices: [
+            "Engineer",
+            "Intern",
+            "I don't want to add anymore team members",
+          ],
+        },
+      ])
+      .then((answer) => {
+        console.log(answer.teamChoice);
+        if (answer.teamChoice === "Engineer") {
+          createEngineer();
+        }
+        if (answer.teamChoice === "Intern") {
+          createIntern();
+        }
+        if (answer.teamChoice === "I don't want to add anymore team members") {
+          fs.writeFile(outputPath, render(teamMembers), "utf-8", function (
+            err
+          ) {
+            if (err) throw err;
+            console.log(
+              "Your team has been built! Access your roster in the browser"
+            );
+          });
+        }
+      });
   }
 
   function createEngineer() {
     console.log("Please build your team");
 
-    // init function "which type of member would you like to add?"
-    // create a switch off of that question
-    // Engineer? Intern? Or complete team?
-
     inquirer
       .prompt([
         {
-          // fill in more questions using this pattern
           type: "input",
           name: "engineerName",
           message: "What is your engineer's name?",
@@ -122,7 +131,6 @@ function mainMenu() {
           },
         },
         {
-          // fill in more questions using this pattern
           type: "input",
           name: "engineerId",
           message: "What is your engineer's ID?",
@@ -134,7 +142,6 @@ function mainMenu() {
           },
         },
         {
-          // fill in more questions using this pattern
           type: "input",
           name: "engineerEmail",
           message: "What is your engineer's email?",
@@ -146,7 +153,6 @@ function mainMenu() {
           },
         },
         {
-          // fill in more questions using this pattern
           type: "input",
           name: "engineerGithub",
           message: "What is your engineer's Github?",
@@ -167,7 +173,7 @@ function mainMenu() {
         );
         teamMembers.push(engineer);
         idArray.push(answer.engineerId);
-        createIntern();
+        nextTeamMember();
       });
   }
 
@@ -176,7 +182,6 @@ function mainMenu() {
     inquirer
       .prompt([
         {
-          // fill in more questions using this pattern
           type: "input",
           name: "internName",
           message: "What is your intern's name?",
@@ -189,7 +194,6 @@ function mainMenu() {
         },
 
         {
-          // fill in more questions using this pattern
           type: "input",
           name: "internId",
           message: "What is your intern's ID?",
@@ -201,7 +205,6 @@ function mainMenu() {
           },
         },
         {
-          // fill in more questions using this pattern
           type: "input",
           name: "internEmail",
           message: "What is your intern's email?",
@@ -213,7 +216,6 @@ function mainMenu() {
           },
         },
         {
-          // fill in more questions using this pattern
           type: "input",
           name: "internSchool",
           message: "What is your intern's school?",
@@ -234,36 +236,9 @@ function mainMenu() {
         );
         teamMembers.push(intern);
         idArray.push(answer.internId);
-        // call function here that fires next inquirer prompt
-        buildTeam();
-        // After the user has input all employees desired, call the `render` function (required
-        // above) and pass in an array containing all employee objects; the `render` function will
-        // generate and return a block of HTML including templated divs for each employee!
+        //function that asks user which team member they'd like to add, if any
+        nextTeamMember();
       });
-    function buildTeam() {
-      fs.writeFile(outputPath, render(teamMembers), "utf-8", function (err) {
-        if (err) throw err;
-        // passed in outputPath
-        console.log(outputPath);
-      });
-    }
   }
 }
-
 mainMenu();
-
-// After you have your html, you're now ready to create an HTML file using the HTML
-// returned from the `render` function. Now write it to a file named `team.html` in the
-// `output` folder. You can use the variable `outputPath` above target this location.
-// Hint: you may need to check if the `output` folder exists and create it if it
-// does not.
-
-// HINT: each employee type (manager, engineer, or intern) has slightly different
-// information; write your code to ask different questions via inquirer depending on
-// employee type.
-
-// HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
-// and Intern classes should all extend from a class named Employee; see the directions
-// for further information. Be sure to test out each class and verify it generates an
-// object with the correct structure and methods. This structure will be crucial in order
-// for the provided `render` function to work! ```
