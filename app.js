@@ -97,8 +97,8 @@ function mainMenu() {
         // above) and pass in an array containing all employee objects; the `render` function will
         // generate and return a block of HTML including templated divs for each employee!
       });
-    function render(OUTPUT_DIR) {
-      fs.writeFile("team.html", OUTPUT_DIR, function (err) {
+    function render(file) {
+      fs.writeFile("./output/team.html", file, function (err) {
         if (err) throw err;
         // passed in outputPath
         console.log(outputPath);
