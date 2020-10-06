@@ -10,36 +10,106 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-
 function mainMenu() {
-    function createManager() {
-        console.log("Pease build your team");
-        inquirer.prompt([{
-            // fill in more questions using this pattern
-            type: "input",
-            name: "managerName",
-            message: "What is your manager's name?"
-            validate: answer => {
-                if (answer !== "") {
-                    return true;
-                }
-                return "Please enter a name"
+  function createManager() {
+    console.log("Pease build your team");
+    inquirer
+      .prompt([
+        {
+          // fill in more questions using this pattern
+          type: "input",
+          name: "managerName",
+          message: "What is your manager's name?",
+          validate: (answer) => {
+            if (answer !== "") {
+              return true;
             }
-        }]).then(answer => {
-            const manager = new Manager(answers.id)
-            teamMembers.push(manager)
-            idArray.push(answers.managerId)
-            // call function here that fires next inquirer prompt
-        })
-    }
+            return "Please enter a name";
+          },
+        },
+      ])
+      .then((answer) => {
+        const manager = new Manager(answers.id);
+        teamMembers.push(manager);
+        idArray.push(answers.managerId);
+        createEngineer();
+      });
+  }
+
+  // Write code to use inquirer to gather information about the development team members,
+  // and to create objects for each team member (using the correct classes as blueprints!)
+
+  function createEngineer() {
+    console.log("Pease build your team");
+    inquirer
+      .prompt([
+        {
+          // fill in more questions using this pattern
+          type: "input",
+          name: "engineerName",
+          message: "What is your engineer's name?",
+          validate: (answer) => {
+            if (answer !== "") {
+              return true;
+            }
+            return "Please enter a name";
+          },
+        },
+      ])
+      .then((answer) => {
+        const engineer = new Engineer(answers.id);
+        teamMembers.push(engineer);
+        idArray.push(answers.engineerId);
+        createIntern();
+      });
+  }
+
+  function createIntern() {
+    console.log("Pease build your team");
+    inquirer
+      .prompt([
+        {
+          // fill in more questions using this pattern
+          type: "input",
+          name: "internName",
+          message: "What is your intern's name?",
+          validate: (answer) => {
+            if (answer !== "") {
+              return true;
+            }
+            return "Please enter a name";
+          },
+        },
+      ])
+      .then((answer) => {
+        const intern = new Intern(answers.id);
+        teamMembers.push(intern);
+        idArray.push(answers.internId);
+        // call function here that fires next inquirer prompt
+        render();
+        // After the user has input all employees desired, call the `render` function (required
+        // above) and pass in an array containing all employee objects; the `render` function will
+        // generate and return a block of HTML including templated divs for each employee!
+      });
+  }
 }
 
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
+function render(file) {
+  fs.writeFile("team.html", file, function (err) {
+    if (err) throw err;
+    // passed in generateMarkdown
+    console.log(outputPath);
+  });
+}
 
-// After the user has input all employees desired, call the `render` function (required
-// above) and pass in an array containing all employee objects; the `render` function will
-// generate and return a block of HTML including templated divs for each employee!
+// function createFile(file) {
+// // passed in file as second argument for fs.writeFile
+// fs.writeFile('generateMarkdown.md', file, function (err) {
+//     if (err) throw err;
+//     // passed in generateMarkdown
+//     console.log(generateMarkdown);
+// });
+// }
 
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
