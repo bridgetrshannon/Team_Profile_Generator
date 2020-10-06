@@ -8,8 +8,7 @@ const fs = require("fs");
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
-const render = require("./lib/htmlRenderer");
-// const Employee = require("./lib/Employee");
+// const render = (employees) => {};
 
 // added empty arrays for data to be pushed into
 const teamMembers = [];
@@ -92,13 +91,13 @@ function mainMenu() {
         teamMembers.push(intern);
         idArray.push(answer.internId);
         // call function here that fires next inquirer prompt
-        render();
+        buildTeam();
         // After the user has input all employees desired, call the `render` function (required
         // above) and pass in an array containing all employee objects; the `render` function will
         // generate and return a block of HTML including templated divs for each employee!
       });
-    function render(file) {
-      fs.writeFile("./output/team.html", file, function (err) {
+    function buildTeam(render) {
+      fs.writeFile(outputPath, render, "utf-8", function (err) {
         if (err) throw err;
         // passed in outputPath
         console.log(outputPath);
@@ -107,24 +106,9 @@ function mainMenu() {
   }
 }
 
+// Your writeFile call will take three arguments. the outputPath, a call to the render function you imported on line 11 (passing in the array of team members), and then "utf-8"
+
 mainMenu();
-
-// function render(file) {
-//   fs.writeFile("team.html", file, function (err) {
-//     if (err) throw err;
-//     // passed in outputPath
-//     console.log(outputPath);
-//   });
-// }
-
-// function createFile(file) {
-// // passed in file as second argument for fs.writeFile
-// fs.writeFile('generateMarkdown.md', file, function (err) {
-//     if (err) throw err;
-//     // passed in generateMarkdown
-//     console.log(generateMarkdown);
-// });
-// }
 
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
