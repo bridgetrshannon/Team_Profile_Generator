@@ -9,11 +9,15 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-const Employee = require("./lib/Employee");
+// const Employee = require("./lib/Employee");
+
+// added empty arrays for data to be pushed into
+const teamMembers = [];
+const idArray = [];
 
 function mainMenu() {
   function createManager() {
-    console.log("Pease build your team");
+    console.log("Please build your team");
     inquirer
       .prompt([
         {
@@ -88,20 +92,27 @@ function mainMenu() {
         teamMembers.push(intern);
         idArray.push(answer.internId);
         // call function here that fires next inquirer prompt
-
         render();
         // After the user has input all employees desired, call the `render` function (required
         // above) and pass in an array containing all employee objects; the `render` function will
         // generate and return a block of HTML including templated divs for each employee!
       });
+    function render(OUTPUT_DIR) {
+      fs.writeFile("team.html", OUTPUT_DIR, function (err) {
+        if (err) throw err;
+        // passed in outputPath
+        console.log(outputPath);
+      });
+    }
   }
 }
+
 mainMenu();
 
 // function render(file) {
 //   fs.writeFile("team.html", file, function (err) {
 //     if (err) throw err;
-//     // passed in generateMarkdown
+//     // passed in outputPath
 //     console.log(outputPath);
 //   });
 // }
