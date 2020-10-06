@@ -8,7 +8,7 @@ const fs = require("fs");
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
-// const render = (employees) => {};
+const render = require("./lib/htmlRenderer");
 
 // added empty arrays for data to be pushed into
 const teamMembers = [];
@@ -96,7 +96,7 @@ function mainMenu() {
         // above) and pass in an array containing all employee objects; the `render` function will
         // generate and return a block of HTML including templated divs for each employee!
       });
-    function buildTeam(render) {
+    function buildTeam() {
       fs.writeFile(outputPath, render, "utf-8", function (err) {
         if (err) throw err;
         // passed in outputPath
