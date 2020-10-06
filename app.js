@@ -35,6 +35,7 @@ function mainMenu() {
         createEngineer();
       });
   }
+  createManager();
 
   // Write code to use inquirer to gather information about the development team members,
   // and to create objects for each team member (using the correct classes as blueprints!)
@@ -86,21 +87,22 @@ function mainMenu() {
         teamMembers.push(intern);
         idArray.push(answers.internId);
         // call function here that fires next inquirer prompt
-        render();
+     
         // After the user has input all employees desired, call the `render` function (required
         // above) and pass in an array containing all employee objects; the `render` function will
         // generate and return a block of HTML including templated divs for each employee!
       });
   }
 }
+mainMenu();
 
-function render(file) {
-  fs.writeFile("team.html", file, function (err) {
-    if (err) throw err;
-    // passed in generateMarkdown
-    console.log(outputPath);
-  });
-}
+// function render(file) {
+//   fs.writeFile("team.html", file, function (err) {
+//     if (err) throw err;
+//     // passed in generateMarkdown
+//     console.log(outputPath);
+//   });
+// }
 
 // function createFile(file) {
 // // passed in file as second argument for fs.writeFile
