@@ -1,8 +1,24 @@
+To-Dos:
+
+// Inquirer.prompt
+The project must prompt the user to build an engineering team. An engineering team consists of a manager, and any number of engineers and interns.
+
+Roster output
+The project must generate a team.html page in the output directory, that displays a nicely formatted team roster. Each team member should display the following in no particular order:
+Name
+Role
+ID
+Role-specific property (School, link to GitHub profile, or office number)
+
+To run test:
+npm run test 
+~*~*~*~*~*~*~*~*~*~**~*~~*~*~*~*~*~*~*~*~*~**~*~~*~*~
+~*~*~*~*~*~*~*~*~*~**~*~~*~*~*~*~*~*~*~*~*~**~*~~*~*~
+Completed Tasks: 
+
 The different employee types should all inherit some methods and properties from a base class of Employee.
 
-
 The first class is an Employee parent class with the following properties and methods:
-
 name
 id
 email
@@ -12,8 +28,8 @@ getEmail()
 getRole() // Returns 'Employee'
 The other three classes will extend Employee.
 
-In addition to Employee's properties and methods, Manager will also have:
 
+In addition to Employee's properties and methods, Manager will also have:
 officeNumber
 getOfficeNumber()
 getRole() // Overridden to return 'Manager'
@@ -27,13 +43,3 @@ In addition to Employee's properties and methods, Intern will also have:
 school
 getSchool()
 getRole() // Overridden to return 'Intern'
-
-The project must prompt the user to build an engineering team. An engineering team consists of a manager, and any number of engineers and interns.
-
-Roster output
-The project must generate a team.html page in the output directory, that displays a nicely formatted team roster. Each team member should display the following in no particular order:
-
-Name
-Role
-ID
-Role-specific property (School, link to GitHub profile, or office number)

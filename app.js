@@ -32,8 +32,6 @@ function mainMenu() {
             // call function here that fires next inquirer prompt
         })
     }
-
-    
 }
 
 // Write code to use inquirer to gather information about the development team members,
