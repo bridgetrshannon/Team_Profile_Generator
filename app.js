@@ -77,10 +77,28 @@ function mainMenu() {
         );
         teamMembers.push(manager);
         idArray.push(answer.managerId);
-        createEngineer();
+        // add function here for nextTeamMember
+        // createEngineer();
       });
   }
   createManager();
+
+  function nextTeamMember() {
+      inquirer.prompt([{
+          type:
+          name: teamChoice
+          message:
+          choices: []
+      }]).then(answer => {
+          console.log(answer.teamChoice);
+          if (answer.teamChoice === "Engineer"){
+              createEngineer();
+          }
+          if (answer.teamChoice === "Intern"){
+              createIntern();
+          }
+      })
+  }
 
   function createEngineer() {
     console.log("Please build your team");
