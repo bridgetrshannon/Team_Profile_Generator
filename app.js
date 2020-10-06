@@ -9,6 +9,7 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const Employee = require("./lib/Employee");
 
 function mainMenu() {
   function createManager() {
@@ -29,9 +30,9 @@ function mainMenu() {
         },
       ])
       .then((answer) => {
-        const manager = new Manager(answers.id);
+        const manager = new Manager(answer.id);
         teamMembers.push(manager);
-        idArray.push(answers.managerId);
+        idArray.push(answer.managerId);
         createEngineer();
       });
   }
@@ -58,9 +59,9 @@ function mainMenu() {
         },
       ])
       .then((answer) => {
-        const engineer = new Engineer(answers.id);
+        const engineer = new Engineer(answer.id);
         teamMembers.push(engineer);
-        idArray.push(answers.engineerId);
+        idArray.push(answer.engineerId);
         createIntern();
       });
   }
@@ -83,11 +84,12 @@ function mainMenu() {
         },
       ])
       .then((answer) => {
-        const intern = new Intern(answers.id);
+        const intern = new Intern(answer.id);
         teamMembers.push(intern);
-        idArray.push(answers.internId);
+        idArray.push(answer.internId);
         // call function here that fires next inquirer prompt
-     
+
+        render();
         // After the user has input all employees desired, call the `render` function (required
         // above) and pass in an array containing all employee objects; the `render` function will
         // generate and return a block of HTML including templated divs for each employee!
